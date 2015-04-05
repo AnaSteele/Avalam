@@ -1,7 +1,7 @@
 /*
  *  Fichier     Menu.cpp
  *  Dossier     Mini-projet "Avalam"
- *  Auteur      Marine Taliercio
+ *  Auteur     
  *  Date        Date de début du projet
  *
  *  On gere les menus du jeu
