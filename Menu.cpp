@@ -7,10 +7,12 @@
  *  On gere les menus du jeu
  */
 
-#include <iostream>
-#include "Menu.h"
-#include "Plateau.h"
-//#include "Joueur.h"
+#include        "Menu.h"
+#include        "Plateau.h"
+#include        "Joueur.h"
+
+#include        <iostream>
+
 using namespace std;
 
 /*
@@ -39,24 +41,41 @@ void Menu::menuAvalam(){
  *  Renvoie         Rien
  */
 
+bool Menu::readChoix(int choix){
+    while(!(cin>>choix) || choix<0 || choix>5){
+        if(cin.eof()) return false;
+        else if(cin.fail()) {
+            cout << "saisie incorrecte, recommencez: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else cout << "le chiffre n'est pas entre 0 et 5, recommencez : ";
+    }
+    return true;
+}
+
 void Menu :: lancerPartie(){
     
     menuAvalam();
-
     cout << endl;
     cout << "Veuillez choisir votre menu >>> ";
-    cin >> choixMenu ;
+    cin >> _choixMenu;
     cout << endl;
     
-    switch (choixMenu)
+    if (readChoix(_choixMenu)) cout << "vous avez choisi " << _choixMenu << endl;
+    
+    
+    switch (_choixMenu)
     {
         case 1:{
+            cout << "********************************************" << endl;
+            cout << "************* JOUEUR vs JOUEUR *************" << endl;
+            cout << "********************************************" << endl;
+            
             bool gagner=false;
-            typeJoueur='h';
-            cout << "QUE LA PARTIE COMMENCE !" << endl << endl;
+
             Plateau pl;
-            pl.prenomsJoueurs(typeJoueur);
-            pl.joueEnPremier();
+            pl.choixPrenomsJoueurs();
             pl.aQuiDeJouer();
             pl.initialiser();
             pl.afficher();
@@ -72,8 +91,10 @@ void Menu :: lancerPartie(){
             cout << "********************************************" << endl;
             cout << "*********** JOUEUR vs ORDINATEUR ***********" << endl;
             cout << "********************************************" << endl;
-            typeJoueur='o';
+            _typeJoueur='o';
             cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
+            lancerPartie();
+            break;
         }
             
         case 3:{
@@ -105,7 +126,8 @@ void Menu :: lancerPartie(){
                 if (revenirMenuPrincipal=='o' || revenirMenuPrincipal=='O') lancerPartie();
                 else if (revenirMenuPrincipal=='n' || revenirMenuPrincipal=='N') aPropos();
                 else cout << "ERREUR" << endl;
-            }            break;
+            }
+            break;
         }
             
         case 0:{
@@ -136,7 +158,7 @@ void Menu::parametres(){
     cout << "********************************************" << endl;
     cout << "**************** PARAMETRES ****************" << endl;
     cout << "********************************************" << endl;
-    cout << "           1 - CHNAGER LA FORME DU PLATEAU" << endl;
+    cout << "           1 - CHANGER LA FORME DU PLATEAU" << endl;
     cout << "           2 - CHANGER LA TAILLE DU PLATEAU" << endl;
     cout << "           3 - CHANGER LES PIONS DES JOUEURS" << endl;
     cout << "           0 - REVENIR AU MENU PRINCIPAL" << endl << endl;
@@ -144,17 +166,23 @@ void Menu::parametres(){
     int choixParametres=0;
     cout << "Veuillez choisir votre menu >>> ";
     cin >> choixParametres;
-    switch (choixParametres) {
+    switch (choixParametres){
         case 1:
             cout << "* CHANGER LA FORME DU PLATEAU *" << endl;
+            cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
+            parametres();
             break;
             
         case 2:
             cout << "* CHANGER LA TAILLE DU PLATEAU *" << endl;
+            cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
+            parametres();
             break;
             
         case 3:
             cout << "* CHANGER LES PIONS DES JOUEURS *" << endl;
+            cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
+            parametres(); 
             //changerPionsJoueurs();
             break;
             
