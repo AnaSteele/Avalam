@@ -12,26 +12,24 @@
 
 #include <stdio.h>
 #include <iostream>
+
 using namespace std;
 
-class Menu
-{
-private:
-    int choixMenu;
-    char typeJoueur;
-    bool _tourJoueur;
-    char prenom1[15];//="Joueur1";
-    char prenom2[15];//="Joueur2";
-    
+class Menu{
+
 public:
-    void menuAvalam();
-    void affichageMenuJoueur();
-    void lancerPartie();
-    void parametres();
-    void changerPionsJoueurs();
-    void reglesDuJeu();
-    void aPropos();
-    int quitter(); 
+    void        menuAvalam();
+    void        lancerPartie();
+    void        parametres();
+    void        reglesDuJeu();
+    void        aPropos();
+    bool readChoix(int choix);
+    int         quitter();
+
+private:
+    int         _choixMenu;
+    char        _typeJoueur;
+    bool        _tourJoueur;
 };
 
-#endif /* defined(__avalam_test_22__aff__) */
+#endif 
