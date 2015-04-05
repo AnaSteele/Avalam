@@ -1,7 +1,7 @@
 /*
  *  Fichier     main.cpp
  *  Dossier     Mini projet "Avalam"
- *  Auteur      Marine Talier
+ *  Auteur      
  *  date        Date de début du projet
  *  
  *  Fichier main du projet
