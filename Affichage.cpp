@@ -1,13 +1,19 @@
-
+/*
+ * Fichier      Affichage.cpp
+ *              Mini-Projet "Avalam"
+ * Auteur       Marine Taliercio
+ * Date         2015
+ */
 
 #include <iostream>
+#include <limits>
 #include "Affichage.h"
 
 using namespace std;
 
 /*
- * Fonction     menuPlayer()
- * Description  Affichage du menu pour les players
+ * Fonction     menuJoueur()
+ * Description  Affichage du menu pour les joueurs
  * Arguments    Aucun
  * Renvoi       Rien
  */
@@ -20,10 +26,31 @@ void Affichage::menuJoueur(){
     cout << "   1 - DEPLACER UN PION" << endl;
     cout << "   2 - FAIRE UNE PAUSE" << endl;
     cout << "   3 - QUITTER LA PARTIE" << endl;
+    cout << "   4 - sauvegarde" << endl; 
 }
 
 /*
- * Fonction     menuGame()
+ * Fonction     lireChoixMenuJoueur()
+ * Description  Fonction qui test la saisie pour le menu des joueurs
+ * Arguments    Aucun
+ * Renvoi       int choixMenuJoueur
+ */
+
+int Affichage::lireChoixMenuJoueur(){
+    while(!(cin>>choixMenuJoueur)&&(choixMenuJoueur<=1 || choixMenuJoueur>=3)){
+        if(cin.eof()) return 0;
+        else if(cin.fail()){
+            cout << "ERREUR : SAISIE INCORRECTE >> ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else cout << "ERREUR : LE MENU N'EXISTE PAS >> ";
+    }
+    return choixMenuJoueur;
+}
+
+/*
+ * Fonction     menuJeu()
  * Description  Affichage du menu principal
  * Arguments    Aucun
  * Renvoi       Rien
@@ -36,120 +63,51 @@ void Affichage::menuJeu(){
     cout << "**************************************" << endl;
     cout << "   1 - LANCER UNE PARTIE" << endl;
     cout << "   2 - REGLES DU JEU" << endl;
-    cout << "   3 - PARAMETRES" << endl;
-    cout << "   4 - A PROPOS" << endl;
-    cout << "   5 - QUITTER" << endl;
-}
-
-int Affichage::lireChoixMenuJeu(){
-    cout << "choisir ";
-    while(!(cin>>choixMenu) && (choixMenu<=0 || choixMenu>=5)){
-        if(cin.eof()) return 0;
-        else if(cin.fail()){
-            cout << "saisie incorrecte, choisir ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        }
-        else cout << "n'existe pas, choisir ";
-        cout << endl;
-    }
-    return choixMenu;
+    cout << "   3 - A PROPOS" << endl;
+    cout << "   4 - QUITTER" << endl;
+    cout << "CHOIX >> ";
 }
 
 /*
- * Fonction	Menu::aPropos()
+ * Fonction     lireChoixMenuJeu()
+ * Description  Fonction qui test la saisie pour le menu principal
+ * Arguments    Aucun
+ * Renvoi       int choixMenu
+ */
+
+int Affichage::lireChoixMenuJeu(){
+    while(!(cin>>choixMenu) && (choixMenu<=0 || choixMenu>=4)){
+        if(cin.eof()) return 0;
+        else if(cin.fail()){
+            cout << "ERREUR : SAISIE INCORRECTE >> ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
+        else cout << "ERREUR : LE MENU N'EXISTE PAS >> ";
+    }
+    return choixMenu;
+    return 0; 
+}
+
+/*
+ * Fonction     aPropos()
  * Description  Fonction qui affiche qui à créer le programme
  * Arguments	Aucun
  * Renvoie      Aucun
  */
 
 void Affichage::aPropos(){
-    cout << "********************************************" << endl;
-    cout << "***************** A PROPOS *****************" << endl;
-    cout << "********************************************" << endl;
-    cout << "       Réalisé par " << endl;
-    cout << "             " << endl;
-    cout << "                " << endl;
+    cout << "**************************************" << endl;
+    cout << "************** A PROPOS **************" << endl;
+    cout << "**************************************" << endl;
+    cout << "     Réalisé par Marine Taliercio" << endl;
+    cout << "           L2 CERI Avignon" << endl;
+    cout << "               TD2 - TP3" << endl;
     cout << endl;
 }
 
 /*
- * Fonction	Menu::lireChoixMenuParametres
- * Description	Fonction qui verifie si le menu entrer est bien un int
- * Arguments	Aucun
- * Renvoie	bool
- */
-
-/*
- bool Menu::lireChoixMenuParametres(){
- cout << endl;
- cout << "VEUILLEZ CHOISIR VOTRE MENU >> ";
- while(!(cin>>choixParametres) && (choixParametres<=0 || choixParametres>=3)){
- if(cin.eof()) return false;
- else if(cin.fail()) {
- cout << "SAISIE INCORRECTE, RECOMMENCEZ >> ";
- cin.clear();
- cin.ignore(numeric_limits<streamsize>::max(), '\n');
- }
- else cout << "LE MENU N'EXISTE PAS, RECOMMENCEZ >> ";
- cout << endl;
- }
- return true;
- }
- */
-
-/*
- * Fonction	Menu::parametresDuJeu()
- * Description  Fonction qui affiche les différents paramètres possibles
- * Arguments    Aucun
- * Renvoie      Aucun
- */
-
-void Affichage::parametresDuJeu(){
-    cout << "********************************************" << endl;
-    cout << "**************** PARAMETRES ****************" << endl;
-    cout << "********************************************" << endl;
-    cout << "           1 - CHANGER LA FORME DU PLATEAU" << endl;
-    cout << "           2 - CHANGER LA TAILLE DU PLATEAU" << endl;
-    cout << "           3 - CHANGER LES PIONS DES JOUEURS" << endl;
-    cout << "           0 - REVENIR AU MENU PRINCIPAL" << endl << endl;
-    
-    cout << "VEUILLEZ CHOISIR VOTRE MENU >> ";
-    cin >> choixParametres;
-    //  lireChoixMenuParametres();
-    cout << endl;
-    switch (choixParametres){
-        case 1:
-            cout << "* CHANGER LA FORME DU PLATEAU *" << endl;
-            cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
-            parametresDuJeu();
-            break;
-            
-        case 2:
-            cout << "* CHANGER LA TAILLE DU PLATEAU *" << endl;
-            cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
-            parametresDuJeu();
-            break;
-            
-        case 3:
-            cout << "* CHANGER LES PIONS DES JOUEURS *" << endl;
-            cout << "* PARTIE NON DEVELOPPEE *" << endl << endl;
-            parametresDuJeu();
-            break;
-            
-        case 0:
-            //lancerPartie();
-            break;
-            
-        default:
-            cout << "ERREUR >> LE MENU QUE VOUS AVEZ CHOISI N'EXISTE PAS" << endl;
-            parametresDuJeu();
-            break;
-    }
-}
-
-/*
- * Fonction 	Menu::reglesDuJeu()
+ * Fonction 	reglesDuJeu()
  * Description  Fonction qui affiche les regles du jeu
  * Arguments    Aucun
  * Renvoie      Aucun
@@ -181,15 +139,15 @@ void Affichage::reglesDuJeu(){
 }
 
 /*
- * Fonction	Menu::quitterLeJeu()
+ * Fonction     quitterLeJeu()
  * Description  Fonction qui quitte le jeu
  * Arguments    Aucun
  * Renvoie      int
  */
 
 int Affichage::quitterLeJeu(){
-    return 0; //exit(1); 
+    exit(1);
 }
 
- 
+
 
