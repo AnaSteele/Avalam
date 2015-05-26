@@ -1,22 +1,27 @@
-
+/*
+ * Fichier      Affichage.h
+ *              Mini-Projet "Avalam"
+ * Auteur       Marine Taliercio
+ * Date         2015
+ */
 
 #ifndef __Avalam__Affichage__
 #define __Avalam__Affichage__
 
 class Affichage{
+private:
+    int choixMenu;
+    int choixMenuJoueur;
+
 public:
     void menuJoueur();
     void menuJeu();
-    int lireChoixMenuJeu();
     void aPropos();
-    void parametresDuJeu();
-    bool lireChoixMenuParametres(); 
     void reglesDuJeu();
+    
+    int lireChoixMenuJeu();
     int quitterLeJeu();
-
-private:
-    int choixMenu;
-    int choixParametres; 
+    int lireChoixMenuJoueur();
 };
 
 
